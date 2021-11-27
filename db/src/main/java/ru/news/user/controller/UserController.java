@@ -5,13 +5,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.news.user.model.User;
 import ru.news.user.service.MyNewsService;
+import ru.news.user.service.UserService;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
 public class UserController {
-    private final MyNewsService<User, Long> myNewsService;
+    private final UserService myNewsService;
 
     @GetMapping("/")
     public ResponseEntity<List<User>> getUsers() {
@@ -28,5 +30,10 @@ public class UserController {
     @PutMapping("/delete/{id}")
     public ResponseEntity<User> delete(@PathVariable String id) {
         return ResponseEntity.ok(myNewsService.delete(Long.parseLong(id)));
+    }
+
+    @GetMapping("/find-by-login/{login}")
+    public ResponseEntity<User> findByLogin(@PathVariable  String login) {
+        return  ResponseEntity.ok(myNewsService.findByLogin(login));
     }
 }

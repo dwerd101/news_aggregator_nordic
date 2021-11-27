@@ -7,6 +7,7 @@ import ru.news.user.repository.UserRepository;
 import ru.news.user.service.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +36,10 @@ public class UserServiceImpl implements UserService {
         return User.builder()
                 .id(aLong)
                 .build();
+    }
+
+    public User findByLogin(String login) {
+        return userRepository.findByLogin(login).orElseThrow(RuntimeException::new);
     }
 }
 
