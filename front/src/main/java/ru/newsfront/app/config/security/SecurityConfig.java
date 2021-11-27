@@ -26,8 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .authorizeRequests()
             .antMatchers("/mynews").hasAnyAuthority("user:read", "admin:read")
-            .antMatchers("/news/main/**").hasAnyAuthority("user:read", "admin:read")
-           // .antMatchers("/news").permitAll()
+            .antMatchers("/news/main").hasAnyAuthority("user:read", "admin:read")
+            .antMatchers("/news").permitAll()
             .and()
             .formLogin()
             .loginPage("/auth/login")
@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .clearAuthentication(true)
             .invalidateHttpSession(true)
             .deleteCookies("JSESSIONID", "remember-me")
-            .logoutSuccessUrl("/auth/login");
+            .logoutSuccessUrl("/auth/logout");
     }
 
 
